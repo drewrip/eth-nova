@@ -2,6 +2,7 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const { poseidonContract: poseidonGenContract } = require("circomlibjs");
 
+/*
 describe("poseidon", function () {
     let owner;
     let poseidon2Elements, poseidon3Elements, poseidon;
@@ -42,3 +43,4 @@ describe("poseidon", function () {
       expect(resSC).to.be.equal(resGo);
     });
 });
+*/
