@@ -1,5 +1,6 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const { BN } = require('@openzeppelin/test-helpers');
 const { poseidonContract: poseidonGenContract } = require("circomlibjs");
 
 describe("poseidon", function () {
@@ -41,4 +42,17 @@ describe("poseidon", function () {
       const resSC = await verifier.hash2([1, 2]);
       expect(resSC).to.be.equal(resGo);
     });
+
+    it("sponge absorb 1", async () => {
+      // poseidon goiden3 [extracted using go-iden3-crypto/poseidon implementation]
+      const res =
+        "313014010695700683646576007391559457569";
+      // poseidon smartcontract
+      const resSC = await verifier.spongeAbsorbSqueeze(
+        ["10852932116835785472066100842795129626838246619700435391496453456864446256266"]
+      );
+
+      expect(resSC).to.be.equal(res);
+    });
+  
 });
