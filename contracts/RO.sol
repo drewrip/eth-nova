@@ -28,12 +28,12 @@ library RO {
         v = (v >> 128) | (v << 128);
     }
 
-    function spongeAbsorbSqueeze(uint256[] memory transcript) internal pure returns (uint256) {
-        uint256[] memory transcript_flip_endian = new uint256[](transcript.length);
-        for(uint i = 0; i < transcript.length; i++){
-            transcript_flip_endian[i] = reverse(transcript[i]);
+    function spongeAbsorbSqueeze(uint256[] memory state) internal pure returns (uint256) {
+        uint256[] memory state_flip_endian = new uint256[](state.length);
+        for(uint i = 0; i < state.length; i++){
+            state_flip_endian[i] = reverse(state[i]);
         }
-        uint256 hash = uint256(sha256(abi.encodePacked(transcript_flip_endian)));
+        uint256 hash = uint256(sha256(abi.encodePacked(state_flip_endian)));
         // Truncate the hash to the lower 128 bits
         uint256 mask = 0x00000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF;
         return reverse(hash) & mask;
